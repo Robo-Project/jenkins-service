@@ -6,10 +6,16 @@ Handles request to the jenkins server
 
 **Service is hard-coded to run in localhost:4000**
 
+## Manually
+
 Install with
 
-    npm install
+    `npm install`
 
 Run with
 
-    node index.js
+    `node index.js`
+
+## Docker
+
+`docker-compose up`
