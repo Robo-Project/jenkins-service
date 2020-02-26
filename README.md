@@ -6,10 +6,18 @@ Handles request to the jenkins server
 
 **Service is hard-coded to run in localhost:4000**
 
+Remember to also start rpa_dashboard and rpa_dashboard_frontend
+
+## Manually
+
 Install with
 
-    npm install
+    `npm install`
 
 Run with
 
-    node index.js
+    `node index.js`
+
+## Docker
+
+`docker-compose up`

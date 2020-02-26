@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+    jenkins-service:
+        network_mode: host
+        container_name: jenkins-service-backend
+        build: .
+        ports:
+            - 4000:4000
+
