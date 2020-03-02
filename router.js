@@ -3,7 +3,8 @@ const jenkins = require('jenkins')
 
 const api = jenkins({
   baseUrl: 'http://localhost:8080',
-  promisify: true
+  promisify: true,
+  crumbIssuer: true
 })
 
 router.get('/jobs', async (req, res, next) => {
