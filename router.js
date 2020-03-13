@@ -1,13 +1,19 @@
 const router = require('express').Router()
 const jenkins = require('jenkins')
+const Promise = require("bluebird");
+const fs = Promise.promisifyAll(require("fs"));
 
-const api = jenkins({
-  baseUrl: 'http://localhost:8080',
-  promisify: true,
-  crumbIssuer: true
-})
+let api;
 
 router.get('/jobs', async (req, res, next) => {
+  await fs.readFileAsync('jenkins-api-token', 'utf8').then((data) => {
+    const url  = data.slice(0,data.length - 1);
+    api = jenkins({
+      baseUrl: `http://${url}@localhost:8080`,
+      promisify: true,
+      crumbIssuer: true
+    })
+  });
   const jobs = await api.job.list()
   res.json(jobs)
 })
