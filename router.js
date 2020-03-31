@@ -19,20 +19,13 @@ router.get('/jobs', async (req, res, next) => {
   res.json(jobs)
 })
 
-const checkToken = (reqToken) => {
-  if (reqToken == null || reqToken !== backToken) {
-    console.log('error: no backToken or it is invalid')
-    console.log('got: ', reqToken, ' expected: ', backToken)
-    return false
-  }
-  return true
-}
-
 router.post('/build/:job/:branch', async (req, res, next) => {
   console.log('body:', req.body)
   console.log('params:', req.params)
-  if (checkToken(req.body.BACKTOKEN) == false) {
-    return;
+  if (req.body.token !== backToken) {
+    return res.status(401).json({
+      error: 'token missing or invalid'
+    })
   }
 
   const body = req.body
