@@ -20,8 +20,6 @@ router.get('/jobs', async (req, res, next) => {
 })
 
 router.post('/build/:job/:branch', async (req, res, next) => {
-  console.log('body:', req.body)
-  console.log('params:', req.params)
   if (req.body.token !== backToken) {
     return res.status(401).json({
       error: 'token missing or invalid'
