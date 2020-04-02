@@ -7,6 +7,11 @@ let api;
 const backToken = process.env.BACKTOKEN;
 
 router.get('/jobs', async (req, res, next) => {
+  if (req.headers.authorization !== backToken) {
+    return res.status(401).json({
+      error: 'token missing or invalid'
+    })
+  }
   await fs.readFileAsync('jenkins-api-token', 'utf8').then((data) => {
     const auth = data.slice(0,data.length - 1);
     api = jenkins({
