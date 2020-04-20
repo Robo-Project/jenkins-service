@@ -32,11 +32,19 @@ router.post('/build/:job/:branch', async (req, res, next) => {
   }
 
   const body = req.body
-  body.parameters = body.parameters ? body.parameters : {}
+  
   try {
     const path = `${req.params.job}/${req.params.branch}`
+    
+    // use this instead if running a parameterized build
+    /* 
+    body.parameters = body.parameters ? body.parameters : {}
     await api.job.build({ name: path, parameters: body.parameters })
+    */
+    await api.job.build({ name: path })
+    
     res.status(200).end()
+    
   } catch (err) {
     console.log(err)
     res.status(400).json({ err })
